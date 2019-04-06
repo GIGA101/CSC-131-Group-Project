@@ -82,9 +82,9 @@ public class Application {
 			Scanner currLine = new Scanner(file);
 			tableID.put(username, ID);
 			output.println("{" + username + "=" + ID + "}");
+			runAddLocation(username);
 			output.close();
 			currLine.close();
-			runAddLocation(username);
 		}
 		
 //Failed
