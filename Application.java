@@ -7,6 +7,7 @@ public class Application {
 		private static Scanner input2 = new Scanner(System.in);
 		private static TreeMap<String, Integer> tableID = new TreeMap<String, Integer>();
 		private static TreeMap<String, String> tableLocation = new TreeMap<String, String>();
+		private static ArrayList<String> usernameList = new ArrayList<>();
 
 		public static void main(String[] args) throws IOException {
 			makeFileID();
@@ -18,12 +19,12 @@ public class Application {
 		
 		public static void runIntro() throws IOException {
 			System.out.println("Welcome to UoL!");
-			System.out.print("Are you looking to register a new item (register) or report a lost item (report): ");
+			System.out.print("Are you looking to register a new item (register) or locate a lost item (locate): ");
 			String response = input.nextLine();
 			if(response.toLowerCase().equals("register")) {
 				runRegistration();
-			} else if(response.toLowerCase().equals("report")) {
-				runReport();
+			} else if(response.toLowerCase().equals("locate")) {
+				runLocate();
 			} else {
 				runFailedResponse(response);
 			}
@@ -45,21 +46,10 @@ public class Application {
 			}
 		}
 		
-		public static void runReport() throws IOException {
-			
-		}
 		
 //Success		
-		public static void runAddLocation(String username) throws IOException{
-			System.out.print("Where are you currently located: ");
-			String location = input2.nextLine();
-	        File file = new File("C:Account-Location.txt");
-        	PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-			Scanner currLine = new Scanner(file);
-			tableLocation.put(username, location);
-			output.println("{" + username + "=" + location + "}");
-			output.close();
-			currLine.close();
+		public static void runLocate() {
+			
 		}
 		
 		public static void runSuccessfulReport(String username) throws IOException {
@@ -76,11 +66,24 @@ public class Application {
 			}
 		}
 		
+		public static void runAddLocation(String username) throws IOException{
+			System.out.print("Where are you currently located: ");
+			String location = input2.nextLine();
+	        File file = new File("C:Account-Location.txt");
+        	PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			Scanner currLine = new Scanner(file);
+			tableLocation.put(username, location);
+			output.println("{" + username + "=" + location + "}");
+			output.close();
+			currLine.close();
+		}
+		
 		public static void runSuccessfulRegistration(String username, Integer ID) throws IOException {
 	        File file = new File("C:Account-ID.txt");
         	PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 			Scanner currLine = new Scanner(file);
 			tableID.put(username, ID);
+			usernameList.add(username);
 			output.println("{" + username + "=" + ID + "}");
 			runAddLocation(username);
 			output.close();
@@ -102,12 +105,12 @@ public class Application {
 		
 		public static void runFailedResponse(String response) throws IOException {
 			System.out.println("I'm sorry you've entered an invalid input.");
-			System.out.println("If you'd like to report a lost item type report. \nIf you'd like to register a new item type register");
+			System.out.println("If you'd like to locate a lost item type locate. \nIf you'd like to register a new item type register");
 			response = input.nextLine();
 			if(response.toLowerCase().equals("register")) {
 				runRegistration();
-			} else if(response.toLowerCase().equals("report")) {
-				runReport();
+			} else if(response.toLowerCase().equals("locate")) {
+				runLocate();
 			} else {
 				runFailedResponse(response);
 			}
@@ -143,6 +146,10 @@ public class Application {
 		public static TreeMap<String, Integer> getTableID() throws IOException {
 			makeTableID();
 			return tableID;
+		}
+		
+		public static ArrayList<String> getUsernameList() throws IOException {
+			return usernameList;
 		}
 		
 		public static void makeFileID() {
@@ -186,7 +193,7 @@ public class Application {
 					if(str.charAt(i) >= 65 && str.charAt(i) <= 122) {
 						accountName = accountName + "" + str.charAt(i);
 					}
-					if(str.charAt(i) >= 48 && str.charAt(i) <= 57) {
+					if((str.charAt(i) >= 48 && str.charAt(i) <= 57)) {
 						productID = productID + "" + str.charAt(i);
 					}
 					if(str.charAt(i) == '}') {
@@ -208,7 +215,7 @@ public class Application {
 			while(currLine.hasNext()) {
 				String accountName = "";
 				String location = "";
-				str = "" + currLine.next();
+				str = "" + currLine.nextLine();
 				for(int i = 0; i < str.indexOf('='); i++) {
 					if(str.charAt(i) >= 65 && str.charAt(i) <= 122) {
 						accountName = accountName + "" + str.charAt(i);
@@ -217,11 +224,11 @@ public class Application {
 				for(int i = str.indexOf('=')+1;i < str.length()-1; i++) {
 					if(str.charAt(i) != '}') {
 						location = location + "" + str.charAt(i);
-					}
-					if(str.charAt(i) == '}') {
+					}else {
 						break;
 					}
 				}
+				usernameList.add(accountName);
 				tableLocation.put(accountName, location);
 			}
 			output.close();
