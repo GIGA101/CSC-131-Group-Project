@@ -19,12 +19,10 @@ public class Application {
 		
 		public static void runIntro() throws IOException {
 			System.out.println("Welcome to UoL!");
-			System.out.print("Are you looking to register a new item (register) or locate a lost item (locate): ");
+			System.out.print("Are you looking to register a new item (register): ");
 			String response = input.nextLine();
 			if(response.toLowerCase().equals("register")) {
 				runRegistration();
-			} else if(response.toLowerCase().equals("locate")) {
-				runLocate();
 			} else {
 				runFailedResponse(response);
 			}
@@ -48,9 +46,6 @@ public class Application {
 		
 		
 //Success		
-		public static void runLocate() {
-			
-		}
 		
 		public static void runSuccessfulReport(String username) throws IOException {
 			System.out.println("The last location your device was seen in was" + tableLocation.get(username));
@@ -91,6 +86,16 @@ public class Application {
 		}
 		
 //Failed
+		public static void runFailedResponse(String response) throws IOException {
+			System.out.println("I'm sorry you've entered an invalid input.");
+			System.out.println("If you'd like to register a new item type register: ");
+			response = input.nextLine();
+			if(response.toLowerCase().equals("register")) {
+				runRegistration();
+			}else {
+				runFailedResponse(response);
+			}
+		}
 		
 		public static void runFailedReportName() throws IOException{
 			System.out.println("It seems your username is not in use, please enter a valid username: ");
@@ -103,18 +108,6 @@ public class Application {
 			
 		}
 		
-		public static void runFailedResponse(String response) throws IOException {
-			System.out.println("I'm sorry you've entered an invalid input.");
-			System.out.println("If you'd like to locate a lost item type locate. \nIf you'd like to register a new item type register");
-			response = input.nextLine();
-			if(response.toLowerCase().equals("register")) {
-				runRegistration();
-			} else if(response.toLowerCase().equals("locate")) {
-				runLocate();
-			} else {
-				runFailedResponse(response);
-			}
-		}
 		
 		public static void runFailedRegistrationDuplicateName() throws IOException {
 			System.out.println("It seems your username is taken, please select a new one: ");
