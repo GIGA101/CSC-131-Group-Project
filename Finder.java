@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Finder {
-	
+	//private variables
 	private static Scanner input = new Scanner(System.in);
 	private static Scanner input2 = new Scanner(System.in);
 	private static TreeMap<String, Integer> tableID = new TreeMap<String, Integer>();
@@ -24,7 +24,7 @@ public class Finder {
 		getUsername(username, location, ID);
 		System.out.println(tableLocation);
 	}
-	
+	//Anywhere code could be made more Robust in class methods?
 	public static void initializeFinder() throws IOException {
 		Application.makeFileID();
 		Application.makeFileLocation();
