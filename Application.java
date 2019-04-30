@@ -97,18 +97,6 @@ public class Application {
 			}
 		}
 		
-		public static void runFailedReportName() throws IOException{
-			System.out.println("It seems your username is not in use, please enter a valid username: ");
-			String username = input.nextLine();
-			if(tableID.containsKey(username)) {
-				runFailedReportName();
-			}else {
-				runSuccessfulReport(username);
-			}
-			
-		}
-		
-		
 		public static void runFailedRegistrationDuplicateName() throws IOException {
 			System.out.println("It seems your username is taken, please select a new one: ");
 			String username = input.nextLine();
@@ -214,7 +202,7 @@ public class Application {
 						accountName = accountName + "" + str.charAt(i);
 					}
 				}
-				for(int i = str.indexOf('=')+1;i < str.length()-1; i++) {
+				for(int i = str.indexOf('=')+1; i < str.length()-1; i++) {
 					if(str.charAt(i) != '}') {
 						location = location + "" + str.charAt(i);
 					}else {
