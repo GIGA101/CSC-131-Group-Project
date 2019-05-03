@@ -53,7 +53,7 @@ public class Application {
 
 		public static void runSuccessfulRegistrationDuplicateID(String username) throws IOException {
 			System.out.print("Please enter the ID number of your device: ");
-			Integer ID = input.nextInt();
+			int ID = input.nextInt();
 			if(tableID.containsValue(ID)) {
 				runFailedRegistrationDuplicateID(username);
 			}else {
@@ -96,6 +96,18 @@ public class Application {
 				runFailedResponse(response);
 			}
 		}
+		
+		public static void runFailedReportName() throws IOException{
+			System.out.println("It seems your username is not in use, please enter a valid username: ");
+			String username = input.nextLine();
+			if(tableID.containsKey(username)) {
+				runFailedReportName();
+			}else {
+				runSuccessfulReport(username);
+			}
+			
+		}
+		
 		
 		public static void runFailedRegistrationDuplicateName() throws IOException {
 			System.out.println("It seems your username is taken, please select a new one: ");
@@ -202,7 +214,7 @@ public class Application {
 						accountName = accountName + "" + str.charAt(i);
 					}
 				}
-				for(int i = str.indexOf('=')+1; i < str.length()-1; i++) {
+				for(int i = str.indexOf('=')+1;i < str.length()-1; i++) {
 					if(str.charAt(i) != '}') {
 						location = location + "" + str.charAt(i);
 					}else {
@@ -215,4 +227,65 @@ public class Application {
 			output.close();
 			currLine.close();
 		}
+}
+
+public class Person
+{
+   public int age;
+   public String gender;
+   public String name;
+   
+   public Person()
+   {
+      String name;
+      String gender;
+      int age;
+   }
+   
+   public int getage()
+   {
+      return age;
+   }
+   public String getname()
+   {
+      return name;
+   }
+   public String getgender()
+   {
+      return gender;
+   }
+   
+   public void setAge(int agee)
+   {
+      age = agee;
+   }
+   public void setName(String namee)
+   {
+      name = namee;
+   }
+   public void setGender(String gen)
+   {
+      gender = gen;
+   }
+   
+   public Person(String gen, String namee, int agee)
+   {
+      gender = gen;
+      name = namee;
+      age = agee;
+   }
+   public static void main(String[] args)
+   {
+     Person per1 = new Person();
+     
+     System.out.println("Name: " + per1.getname());
+     System.out.println("Age: " + per1.getage());
+     System.out.println("Gender: " + per1.getgender());
+     
+     per1.setName("Kenneth");
+     per1.setAge(21);
+     per1.setGender("Male");
+     
+     
+   }
 }
