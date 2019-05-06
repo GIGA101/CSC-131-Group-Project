@@ -56,7 +56,7 @@ public class Finder {
 			updateLocation(username, location, ID);
 		}
 	}
-	//Locater Code
+	
 	public static void updateLocation(String username, String location, int ID) throws IOException {
 		System.out.println("Enter the location the current item is at: ");
 		location = input2.nextLine();
