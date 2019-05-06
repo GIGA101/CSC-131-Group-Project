@@ -24,7 +24,7 @@ public class Finder {
 		getUsername(username, location, ID);
 		System.out.println(tableLocation);
 	}
-	//Anywhere code could be made more Robust in class methods?
+	
 	public static void initializeFinder() throws IOException {
 		Application.makeFileID();
 		Application.makeFileLocation();
@@ -34,7 +34,7 @@ public class Finder {
 		System.out.println(tableLocation);
 		usernameList = Application.getUsernameList();
 	}
-	
+	//Finder Code
 	public static void getUsername(String username, String location, int ID) throws IOException {
 		System.out.println("Enter the user you wish to update: ");
 		username = input.nextLine();
@@ -56,7 +56,7 @@ public class Finder {
 			updateLocation(username, location, ID);
 		}
 	}
-	
+	//Locater Code
 	public static void updateLocation(String username, String location, int ID) throws IOException {
 		System.out.println("Enter the location the current item is at: ");
 		location = input2.nextLine();
