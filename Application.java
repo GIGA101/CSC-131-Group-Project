@@ -33,6 +33,8 @@ public class Application {
 			String username = input.nextLine();
 			if(tableID.containsKey(username)) {
 				runFailedRegistrationDuplicateName();
+			} else if (!username.matches("[a-zA-Z0-9]+")) {
+				runFailedRegistrationAlphanumericName();		
 			}else {
 				System.out.print("Please enter the ID number of your device: ");
 				Integer ID = input.nextInt();
@@ -87,7 +89,7 @@ public class Application {
 		
 //Failed
 		public static void runFailedResponse(String response) throws IOException {
-			System.out.println("I'm sorry you've entered an invalid input.");
+			System.out.println("I'm sorry you've entered an invalid input");
 			System.out.println("If you'd like to register a new item type register: ");
 			response = input.nextLine();
 			if(response.toLowerCase().equals("register")) {
@@ -95,6 +97,16 @@ public class Application {
 			}else {
 				runFailedResponse(response);
 			}
+		}
+		
+		public static void runFailedRegistrationAlphanumericName() throws IOException {
+			System.out.println("Your name can only contain letters and numbers, please create a new one: ");
+			String username = input.nextLine();
+			if(!username.matches("[a-zA-Z0-9]+")) {
+				runFailedRegistrationAlphanumericName();
+			}else {
+				runSuccessfulRegistrationDuplicateID(username);			//no need to create a new success method.
+			}															
 		}
 		
 		public static void runFailedRegistrationDuplicateName() throws IOException {
