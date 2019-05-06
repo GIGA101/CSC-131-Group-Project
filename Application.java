@@ -37,7 +37,18 @@ public class Application {
 				runFailedRegistrationAlphanumericName();		
 			}else {
 				System.out.print("Please enter the ID number of your device: ");
+				//Integer ID = input.nextInt();
+				while(!input.hasNextInt()) {
+					System.out.println("Enter only digits for user ID please: ");
+					input.next();
+				}
 				Integer ID = input.nextInt();
+				while (count(ID) > 9 || count(ID) < 9) {
+					System.out.println("ID must be 9 digits long. Please reenter your ID: ");
+					ID = input.nextInt();
+					count(ID);
+				}
+				
 				if(tableID.containsValue(ID)) {
 					runFailedRegistrationDuplicateID(username);
 				}else {
@@ -55,7 +66,17 @@ public class Application {
 
 		public static void runSuccessfulRegistrationDuplicateID(String username) throws IOException {
 			System.out.print("Please enter the ID number of your device: ");
-			int ID = input.nextInt();
+			while(!input.hasNextInt()) {
+				System.out.println("Enter only digits for user ID please: ");
+				input.next();
+			}
+			Integer ID = input.nextInt();
+			while (count(ID) > 9 || count(ID) < 9) {
+				System.out.println("ID must be 9 digits long. Please reenter your ID: ");
+				ID = input.nextInt();
+				count(ID);
+			}
+			
 			if(tableID.containsValue(ID)) {
 				runFailedRegistrationDuplicateID(username);
 			}else {
@@ -122,6 +143,15 @@ public class Application {
 		public static void runFailedRegistrationDuplicateID(String username) throws IOException {
 			System.out.println("It seems your ID hasalready been activated, please re-enter your ID: ");
 			Integer ID = input.nextInt();
+			while(!input.hasNextInt()) {
+				System.out.println("Enter only digits for user ID please: ");
+				input.next();
+			}
+			while (count(ID) > 9 || count(ID) < 9) {
+				System.out.println("ID must be 9 digits long. Please reenter your ID: ");
+				ID = input.nextInt();
+				count(ID);
+			}
 			if(tableID.containsValue(ID)) {
 				runFailedRegistrationDuplicateID(username);
 			}else {
@@ -226,5 +256,11 @@ public class Application {
 			}
 			output.close();
 			currLine.close();
+		}
+		
+		public static int count(int n) throws IOException {
+			if (n == 0)
+				return 0;
+			return 1 + count(n/10);
 		}
 }
