@@ -69,7 +69,7 @@ public class Application {
 		}
 
 		public static void runSuccessfulRegistrationDuplicateID(String username) throws IOException {
-			System.out.print("Please enter the 5 digit ID number of your device: ");
+			System.out.print("Please enter the ID of your device: ");
 			while(!input.hasNextInt()) {
 				System.out.println("Enter only digits for user ID please: ");
 				input.next();
