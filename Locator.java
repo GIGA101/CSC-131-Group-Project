@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 
-public class Locater {
+public class Locator {
 	//private variables
 	private static Scanner input = new Scanner(System.in);
 	private static Scanner input2 = new Scanner(System.in);
