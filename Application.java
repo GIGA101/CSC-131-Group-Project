@@ -36,15 +36,14 @@ public class Application {
 			} else if (!username.matches("[a-zA-Z0-9]+")) {
 				runFailedRegistrationAlphanumericName();		
 			}else {
-				System.out.print("Please enter the ID number of your device: ");
-				//Integer ID = input.nextInt();
+				System.out.print("Please enter the 5 digit ID number of your device: ");
 				while(!input.hasNextInt()) {
 					System.out.println("Enter only digits for user ID please: ");
 					input.next();
 				}
 				Integer ID = input.nextInt();
-				while (count(ID) > 9 || count(ID) < 9) {
-					System.out.println("ID must be 9 digits long. Please reenter your ID: ");
+				while (count(ID) > 5 || count(ID) < 5) {
+					System.out.println("ID must be 5 digits long. Please reenter your ID: ");
 					ID = input.nextInt();
 					count(ID);
 				}
@@ -65,14 +64,14 @@ public class Application {
 		}
 
 		public static void runSuccessfulRegistrationDuplicateID(String username) throws IOException {
-			System.out.print("Please enter the ID number of your device: ");
+			System.out.print("Please enter the 5 digit ID number of your device: ");
 			while(!input.hasNextInt()) {
 				System.out.println("Enter only digits for user ID please: ");
 				input.next();
 			}
 			Integer ID = input.nextInt();
-			while (count(ID) > 9 || count(ID) < 9) {
-				System.out.println("ID must be 9 digits long. Please reenter your ID: ");
+			while (count(ID) > 5 || count(ID) < 5) {
+				System.out.println("ID must be 5 digits long. Please reenter your ID: ");
 				ID = input.nextInt();
 				count(ID);
 			}
@@ -223,7 +222,7 @@ public class Application {
 						break;
 					}
 				}
-				Integer ID = Integer.parseInt(productID);
+				int ID = Integer.parseInt(productID);
 				tableID.put(accountName, ID);
 			}
 			output.close();
