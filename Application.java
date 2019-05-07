@@ -36,14 +36,14 @@ public class Application {
 			} else if (!username.matches("[a-zA-Z0-9]+")) {
 				runFailedRegistrationAlphanumericName();		
 			}else {
-				System.out.print("Please enter the 5 digit ID number of your device: ");
+				System.out.print("Please enter ID of your device: ");
 				while(!input.hasNextInt()) {
 					System.out.println("Enter only digits for user ID please: ");
 					input.next();
 				}
 				Integer ID = input.nextInt();
-				while (count(ID) > 5 || count(ID) < 5) {
-					System.out.println("ID must be 5 digits long. Please reenter your ID: ");
+				while (count(ID) > 5) {
+					System.out.println("Your ID must be less than 6 digits long. Please reenter your ID: ");
 					ID = input.nextInt();
 					count(ID);
 				}
