@@ -1,3 +1,7 @@
+/* Significant Contributions by:
+ * Rhys Galloway
+ * Aaron Inocelias
+ */
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,7 +26,6 @@ public class Finder {
 		int ID = 0;
 		initializeFinder();
 		getUsername(username, location, ID);
-		System.out.println(tableLocation);
 	}
 	
 	public static void initializeFinder() throws IOException {
@@ -30,13 +33,11 @@ public class Finder {
 		Application.makeFileLocation();
 		tableID = Application.getTableID();
 		tableLocation = Application.getTableLocation();
-		System.out.println(tableID);
-		System.out.println(tableLocation);
 		usernameList = Application.getUsernameList();
 	}
 	//Finder Code
 	public static void getUsername(String username, String location, int ID) throws IOException {
-		System.out.println("Enter the user you wish to update: ");
+		System.out.print("Enter the username associated with the device you want to update: ");
 		username = input.nextLine();
 		if(!(tableID.containsKey(username))) {
 			System.out.println("That user does not exist: ");
@@ -47,7 +48,7 @@ public class Finder {
 	}
 	
 	public static void getID(String username, String location, int ID) throws IOException {
-		System.out.println("Enter the ID associated with " + username +": ");
+		System.out.print("Enter the ID associated with " + username +"'s device: ");
 		ID = input.nextInt();
 		if(!(tableID.get(username) == ID)) {
 			System.out.println("That ID does not exist, or is not associated with that user: ");
@@ -58,7 +59,7 @@ public class Finder {
 	}
 	
 	public static void updateLocation(String username, String location, int ID) throws IOException {
-		System.out.println("Enter the location the current item is at: ");
+		System.out.print("Enter the updated location the current item is at: ");
 		location = input2.nextLine();
 		String oldLocation = tableLocation.get(username);
 		tableLocation.replace(username, location);
