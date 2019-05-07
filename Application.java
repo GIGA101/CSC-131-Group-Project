@@ -1,3 +1,9 @@
+/* Significant Contributions by:
+ * Kenneth Ando
+ * Aaron Inocelias
+ * Paul-Jason Mello
+ */
+
 import java.io.*;
 import java.util.*;
 
@@ -56,7 +62,6 @@ public class Application {
 			}
 		}
 		
-		
 //Success		
 		
 		public static void runSuccessfulReport(String username) throws IOException {
@@ -70,8 +75,8 @@ public class Application {
 				input.next();
 			}
 			Integer ID = input.nextInt();
-			while (count(ID) > 5 || count(ID) < 5) {
-				System.out.println("ID must be 5 digits long. Please reenter your ID: ");
+			while (count(ID) > 5) {
+				System.out.println("ID must be less than 6 digits long. Please reenter your ID: ");
 				ID = input.nextInt();
 				count(ID);
 			}
@@ -140,17 +145,18 @@ public class Application {
 		}
 		
 		public static void runFailedRegistrationDuplicateID(String username) throws IOException {
-			System.out.println("It seems your ID hasalready been activated, please re-enter your ID: ");
+			System.out.println("It seems your ID has already been activated, please re-enter your ID: ");
 			Integer ID = input.nextInt();
 			while(!input.hasNextInt()) {
 				System.out.println("Enter only digits for user ID please: ");
 				input.next();
 			}
-			while (count(ID) > 9 || count(ID) < 9) {
-				System.out.println("ID must be 9 digits long. Please reenter your ID: ");
+			while (count(ID) > 5) {
+				System.out.println("ID must be less than 6 digits long. Please reenter your ID: ");
 				ID = input.nextInt();
 				count(ID);
 			}
+			
 			if(tableID.containsValue(ID)) {
 				runFailedRegistrationDuplicateID(username);
 			}else {
@@ -159,7 +165,6 @@ public class Application {
 		}
 		
 //Important Backend functionality
-		
 		public static TreeMap<String, String> getTableLocation() throws IOException {
 			makeTableLocation();
 			return tableLocation;
